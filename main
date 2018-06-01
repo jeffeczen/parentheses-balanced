@@ -1,0 +1,42 @@
+function groupCheck(s){
+  var stack = [];
+  var s = s.split('');
+  for (var i = 0; i < s.length; i++) {
+    if (isBracket(s[i])) {
+      if (isOpeningBracket(s[i])) {
+        stack.push(s[i]);
+      }
+      else if (!isCorrectlyOpened(s[i], stack)) return false;
+      else stack.pop();
+    }
+  }
+  if (stack.length != 0) return false;
+  else return true;
+}
+
+function isBracket(c){
+  if (c === "(" || c === ")" || c === "{" || c === "}" || c === "[" || c === "]") return true;
+  else return false;
+}
+
+function isOpeningBracket(c){
+  if (c === "(" || c === "{" || c === "[") return true;
+  else return false;
+}
+
+function isCorrectlyOpened(c, stack){
+  switch (c) {
+    case ')':
+      if (stack[stack.length-1] === '(') return true;
+      else return false;
+      break;
+    case '}':
+      if (stack[stack.length-1] === '{') return true;
+      else return false;
+      break;
+    case ']':
+      if (stack[stack.length-1] === '[') return true;
+      else return false;
+      break;
+  }
+}
